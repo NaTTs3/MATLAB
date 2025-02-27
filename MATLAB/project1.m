@@ -1,34 +1,34 @@
 A=[20 40 60 80 100 120]
 B=[1.71	2.6	3.24	5.46	6.81	8.42]
 n=columns(A)
-for i=1 % i èíslo stupòa polynómu
+for i=1 % i Ã¨Ã­slo stupÃ²a polynÃ³mu
   V=ones(i+1);
-  for l=1:i+1 %nastaví sa v riadku
-    for j=1:i+1 %prejde všetky ståpce v riadku
-      V(j,l)=sum(A.^(j+l-2)); %l suradnica riadka, j suradnica ståpca
-    endfor
-  endfor
+  for l=1:i+1 %nastavÃ­ sa v riadku
+    for j=1:i+1 %prejde vÅ¡etky stÃ¥pce v riadku
+      V(j,l)=sum(A.^(j+l-2)); %l suradnica riadka, j suradnica stÃ¥pca
+    end
+  end
   V(1,1)=n;
   Y=ones(i+1,1);
   for k=1:i+1
     Y(k)=sum(B.*A.^(k-1));  
-  endfor
+  end
   c=V\Y;
   c=flip(c) %koeficienty
   G=polyval(c,A); 
   D(i)=sum((B-G).^2)
   plot(A,G)
-  title("závislos hodnôt t_i od y_i pre rôzne stupne polynómu")
+  title("zÃ¡vislosÂ hodnÃ´t t_i od y_i pre rÃ´zne stupne polynÃ³mu")
   xlabel("t_i")
   ylabel("y_i")
   legend()
   hold on
   p=polyfit(A,B,i) %koeficienty
-endfor
+end
 hold off
 %figure
 %plot(1:6,D)
-%title("závislos súètu najmenších štvorcov od stupòa polynómu")
-%xlabel("stupeò polynómu")
+%title("zÃ¡vislosÂ sÃºÃ¨tu najmenÅ¡Ã­ch Å¡tvorcov od stupÃ²a polynÃ³mu")
+%xlabel("stupeÃ² polynÃ³mu")
 %ylabel("D")
 
