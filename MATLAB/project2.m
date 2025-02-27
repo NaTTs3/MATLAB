@@ -9,29 +9,29 @@ f=zeros(1,n);                                 %vektor pre faktorialy
 f(1)=1;
 for j=1:n 
   delta(j,1)=B(j);                            %do prveho stlpca matice delta da hodnoty z B
-endfor
+end
 for k=2:n                                     %nastavi sa v stlpci
   for j=1:n+1-k                               %prechadza cez riadky
     delta(j,k)=delta(j+1,k-1)-delta(j,k-1);   %zapise do matice hodnoty doprednych diferencii
-  endfor
+  end
   f(k)=f(k-1)*k;                              %zapise do vektora hodnoty faktorialov od 2 po n
-endfor
+end
 for l=2:n
   C(l)=delta(1,l)./(f(l-1)*h^(l-1));          %zapise zvysne hodnoty koeficientov newtonovho polynomu
-endfor
+end
 C
 p=[1,-A(1)];                                  %hodnoty polynomu (x-x_0)
 U=zeros(n);                                   %matica, kde sa budu do riadkov zapisovat koeficienty p vynasobene zistenymi koef C newtonovho polynomu
 for i=2:n
   U(i,n-length(p)+1:n)=p*C(i);
   p=conv(p,[1,-A(i)]);                        %conv(a,b) ak a,b predstavuju koef polynomov, funkcia conv mi da koef sucinu tych dvoch polynomov (spocita suciny pri c_i)
-endfor
+end
 U(1,n)=B(1);
 P=sum(U,1)                                    %koeficienty polynomu 
 
 G=polyval(P,A);
 plot(A,G,"b",A,B,"o")
-title("Z·vislosù y od t")
+title("Z√°vislos¬ù y od t")
 xlabel("t")
 ylabel("y")
 
@@ -45,9 +45,9 @@ for i=1:1000                                  %nastavi sa v riadku
   for j=1:1000                                %nastavi sa v stlpci
     for k=1:N
       K(i,j)=(P(k)*O(i,j)^(N-k))+K(i,j);
-    endfor
-  endfor
-endfor
+    end
+  end
+end
 priama=toc
 
 
@@ -57,9 +57,9 @@ for i=1:1000                                  %nastavi sa v riadku
   for j=1:1000                                %nastavi sa v stlpci
     for k=1:6
      T(i,j)=P(k+1)+T(i,j)*O(i,j);
-    endfor
-  endfor
-endfor
+    end
+  end
+end
 horner=toc
 
 %R=P-c'                                         %c su koeficienty polynomu z 1. zadania zistene metodou najmensich stvorcov
